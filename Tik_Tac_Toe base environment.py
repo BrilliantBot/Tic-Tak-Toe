@@ -1,0 +1,65 @@
+spot_placeholders = [0,0,0,0,0,0,0,0,0]
+class Player():
+    def __init__(self, name, start = False):
+        self.values = {0:.5}
+        self.name = name
+        self.turn = start
+
+def get_action(player):
+    while True:
+        action = int(input(player.name + ', Where would you like to go?\n Move: '))
+        if spot_placeholders[action] == 0:
+            return action
+        else:
+            continue
+
+def check_for_winner():
+    if spot_placeholders[0] == spot_placeholders[1] and spot_placeholders[1] == spot_placeholders[2] and spot_placeholders[2] != 0:
+        return True
+    if spot_placeholders[0] == spot_placeholders[3] and spot_placeholders[3] == spot_placeholders[6] and spot_placeholders[6] != 0:
+        return True
+    if spot_placeholders[0] == spot_placeholders[4] and spot_placeholders[4] == spot_placeholders[8] and spot_placeholders[8] != 0:
+        return True
+    if spot_placeholders[1] == spot_placeholders[4] and spot_placeholders[4] == spot_placeholders[7] and spot_placeholders[7] != 0:
+        return True
+    if spot_placeholders[2] == spot_placeholders[4] and spot_placeholders[4] == spot_placeholders[6] and spot_placeholders[6] != 0:
+        return True
+    if spot_placeholders[2] == spot_placeholders[5] and spot_placeholders[5] == spot_placeholders[8] and spot_placeholders[8] != 0:
+        return True
+    if spot_placeholders[6] == spot_placeholders[7] and spot_placeholders[7] == spot_placeholders[8] and spot_placeholders[8] != 0:
+        return True
+    if spot_placeholders[3] == spot_placeholders[4] and spot_placeholders[4] == spot_placeholders[5] and spot_placeholders[5] != 0:
+        return True
+    elif (spot_placeholders[0] != 0 and spot_placeholders[1] != 0 and
+          spot_placeholders[2] != 0 and spot_placeholders[3] != 0 and
+          spot_placeholders[4] != 0 and spot_placeholders[5] != 0 and
+          spot_placeholders[6] != 0 and spot_placeholders[7] != 0 and
+          spot_placeholders[8] != 0):
+        return 'CatGame'
+    else:
+        return False
+    
+def play_game(player1,player2):
+    while True:
+        if player1.turn == True:
+            a = get_action(player1)
+            spot_placeholders[a] = 1
+            if check_for_winner():
+                print('Winner = ' + player1.name)
+                break
+        if player2.turn == True:
+            a = get_action(player2)
+            spot_placeholders[a] = 2
+            if check_for_winner():
+                print('Winner = ' + player2.name)
+                break
+            
+        player1.turn = not player1.turn
+        player2.turn = not player2.turn
+      
+        
+
+p1 = Player('Computer 1', True) 
+p2 = Player('Computer 2')   
+
+play_game(p1,p2)
