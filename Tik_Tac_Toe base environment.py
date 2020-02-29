@@ -5,9 +5,12 @@ class Player():
         self.name = name
         self.turn = start
 
-def get_action(player):
+def get_action(player1,player2):
     while True:
-        action = int(input(player.name + ', Where would you like to go?\n Move: '))
+        if player1.turn == True:
+            action = int(input(player1.name + ', Where would you like to go?\n Move: '))
+        if player2.turn == True:
+            action = int(input(player2.name + ', Where would you like to go?\n Move: '))
         if spot_placeholders[action] == 0:
             return action
         else:
@@ -58,14 +61,14 @@ def play_game(player1,player2):
     while True:
         print_board()
         if player1.turn == True:
-            a = get_action(player1)
+            a = get_action(player1,player2)
             spot_placeholders[a] = 1
             if check_for_winner() == True:
                 print('Winner = ' + player1.name)
                 spot_placeholders = [0,0,0,0,0,0,0,0,0]
                 break
         if player2.turn == True:
-            a = get_action(player2)
+            a = get_action(player1,player2)
             spot_placeholders[a] = 2
             if check_for_winner() == True:
                 print('Winner = ' + player2.name)
