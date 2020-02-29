@@ -40,20 +40,29 @@ def check_for_winner():
         return False
     
 def play_game(player1,player2):
+    global spot_placeholders 
+    
     while True:
+        print(spot_placeholders)
         if player1.turn == True:
             a = get_action(player1)
             spot_placeholders[a] = 1
-            if check_for_winner():
+            if check_for_winner() == True:
                 print('Winner = ' + player1.name)
+                spot_placeholders = [0,0,0,0,0,0,0,0,0]
                 break
         if player2.turn == True:
             a = get_action(player2)
             spot_placeholders[a] = 2
-            if check_for_winner():
+            if check_for_winner() == True:
                 print('Winner = ' + player2.name)
+                spot_placeholders = [0,0,0,0,0,0,0,0,0]
                 break
-            
+        if check_for_winner() == 'CatGame':
+            print('CatGame!')
+            spot_placeholders = [0,0,0,0,0,0,0,0,0]
+            break
+        
         player1.turn = not player1.turn
         player2.turn = not player2.turn
       
