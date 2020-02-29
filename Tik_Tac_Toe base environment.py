@@ -13,6 +13,19 @@ def get_action(player):
         else:
             continue
 
+def print_board():
+    board = []
+    for spot in spot_placeholders:
+        if spot == 0:
+            board.append('_')
+        if spot == 1:
+            board.append('X')
+        if spot == 2:
+            board.append('O')
+    print(board[0],board[1],board[2])
+    print(board[3],board[4],board[5])
+    print(board[6],board[7],board[8])
+
 def check_for_winner():
     if spot_placeholders[0] == spot_placeholders[1] and spot_placeholders[1] == spot_placeholders[2] and spot_placeholders[2] != 0:
         return True
@@ -43,7 +56,7 @@ def play_game(player1,player2):
     global spot_placeholders 
     
     while True:
-        print(spot_placeholders)
+        print_board()
         if player1.turn == True:
             a = get_action(player1)
             spot_placeholders[a] = 1
